@@ -28,17 +28,22 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
+
+    <div class="container" id="addInTime">
       <!-- Timeblocks go here -->
       <div class="hour"></div>
         <form class="form-inline">
           <div class="col-2 col-md-2 col-xl-2 mb-2"> 9 am </div>
           <input class="col-8 col-md-8 col-xl-8 me-3 time-block row" type="text"></input>
         <button class="col-2 col-md-2 col-xl-2 mb-2 saveBtn row" type="submit" id="saveButton">Save Button</button>
+      </form>
       </div>
-    </form>
+
+    <!-- ends here -->
     </div>
+    
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
   </body>
 </html>
