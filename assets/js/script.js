@@ -1,21 +1,17 @@
-var timeSlot =
-  'div class="hour"></div>' +
-  '<form class="form-inline">' +
-  '<div class="col-2 col-md-2 col-xl-2 mb-2"> 9 am </div>' +
-  '<input class="col-8 col-md-8 col-xl-8 me-3 time-block row" type="text"></input>' +
-  '<button class="col-2 col-md-2 col-xl-2 mb-2 saveBtn row" type="submit" id="saveButton">Save Button</button>' +
-  "</div>" +
-  "</form";
+// add container to hold it all.
+var divContainer = document.getElementById(addInTime);
+
 // make div for js 2
 var divClassHour = document.createElement("div");
 divClassHour.classList.add("hour");
 // create form element line 3.
-var FormClassFormInLine = document.createElement("form");
-FormClassFormInLine.classList.add("form-inline");
+var formInline = document.createElement("form");
+formInline.classList.add("form-inline");
 //create div  with class for bootstrap line 4.
-var divBootStrap = document.createElement("div");
-divBootStrap.classList.add("col-2", "col-md-2", "col-xl-2", "mb-2");
-divBootStrap.innerHTML = "9am";
+var divTimeDisplay = document.createElement("div");
+divTimeDisplay.classList.add("col-2", "col-md-2", "col-xl-2", "mb-2");
+divTimeDisplay.innerHTML = "9am";
+
 // var input section line 5.
 var inputSection = document.createElement("input");
 inputSection.classList.add(
@@ -26,16 +22,28 @@ inputSection.classList.add(
   "time-block",
   "row"
 );
-// TODO!!!!need to add types for inputSection
+// add type to inputSection of text.
+inputSection.setAttribute("type", "text");
+// add button line 6
+var saveTimeButton = document.createElement("button");
+saveTimeButton.classList.add(
+  "col-2",
+  "col-md-2",
+  "col-xl-2",
+  "mb-2",
+  "saveBtn",
+  "row"
+);
+saveTimeButton.innerHTML = "Save Button";
 
 var containerDiv = document.querySelector(".container");
 // dynamically appending hours to DOM
 
-function hourPanels() {
-  //   var timeCard = containerDiv.append(timeSlot);
+var hourPanels = function () {
   document.getElementById("addInTime").appendChild(divClassHour);
-  divClassHour.appendChild(FormClassFormInLine);
-  FormClassFormInLine.appendChild(divBootStrap);
-  divBootStrap.appendChild(inputSection);
-}
-hourPanels(divClassHour);
+  document.getElementById("addInTime").appendChild(formInline);
+  formInline.appendChild(divTimeDisplay);
+  formInline.appendChild(inputSection);
+  formInline.appendChild(saveTimeButton);
+};
+hourPanels(divContainer);
