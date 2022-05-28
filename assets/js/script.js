@@ -46,4 +46,16 @@ var hourPanels = function () {
   formInline.appendChild(inputSection);
   formInline.appendChild(saveTimeButton);
 };
-hourPanels(divContainer);
+hourPanels();
+
+var hourAdditions = function () {
+  for (var i = 9; i < 18; i++) {
+    if (i < 12) {
+      console.log(i, "am");
+    }
+    if (i >= 12) {
+      console.log(i, "pm");
+    }
+  }
+};
+hourAdditions();
