@@ -1,6 +1,5 @@
 // add container to hold it all.
 var divContainer = document.getElementById(addInTime);
-
 // make div for js 2
 var divClassHour = document.createElement("div");
 divClassHour.classList.add("hour");
@@ -10,7 +9,6 @@ formInline.classList.add("form-inline");
 //create div  with class for bootstrap line 4.
 var divTimeDisplay = document.createElement("div");
 divTimeDisplay.classList.add("col-2", "col-md-2", "col-xl-2", "mb-2");
-divTimeDisplay.innerHTML = "9am";
 
 // var input section line 5.
 var inputSection = document.createElement("input");
@@ -39,23 +37,44 @@ saveTimeButton.innerHTML = "Save Button";
 var containerDiv = document.querySelector(".container");
 // dynamically appending hours to DOM
 
-var hourPanels = function () {
+const hourPanel = function () {
+  // !!! ADD IN ALL VARIABLES ABOVE.
   document.getElementById("addInTime").appendChild(divClassHour);
   document.getElementById("addInTime").appendChild(formInline);
   formInline.appendChild(divTimeDisplay);
   formInline.appendChild(inputSection);
   formInline.appendChild(saveTimeButton);
 };
-hourPanels();
 
 var hourAdditions = function () {
   for (var i = 9; i < 18; i++) {
     if (i < 12) {
-      console.log(i, "am");
+      let hourAm = i + "am";
+      hourPanel();
+      console.log(hourAm);
+      divIdName = "am" + i;
+      divClassHour.setAttribute("id", hourAm);
+      divTimeDisplay.innerHTML = hourAm;
+    } else if (i == 12) {
+      let noon = i + "pm";
+      hourPanel();
+      console.log(noon);
+      divIdName = "pm" + i;
+      divClassHour.setAttribute("id", noon);
+      divTimeDisplay.innerHTML = noon;
+    } else {
+      let hourPm = i - 12 + "pm";
+      hourPanel();
+      console.log(hourPm);
+      divIdName = "pm" + i;
+      divClassHour.setAttribute("id", hourPm);
+      divTimeDisplay.innerHTML = hourPm;
     }
-    if (i >= 12) {
-      console.log(i, "pm");
-    }
+    // document.querySelector("#addInTime").append(hourPanel);
   }
+  window.onload = function () {
+    hourAdditions;
+  };
 };
 hourAdditions();
+console.log(hourPanel());
