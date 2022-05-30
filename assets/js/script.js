@@ -47,6 +47,7 @@ const hourPanel = function (timeSlot) {
   saveTimeButton.addEventListener("click", function () {
     clickHandlerSaveButton(timeSlot.id);
   });
+  saveTimeButton.id = "input-" + timeSlot.id;
   // dynamically appending hours to DOM
   document.getElementById("addInTime").appendChild(divClassHour);
   document.getElementById("addInTime").appendChild(formInline);
@@ -89,11 +90,23 @@ console.log(timeArray);
 
 function clickHandlerSaveButton(id) {
   // take in id
+  event.preventDefault();
   const inputData = document.getElementById("input-" + id).value;
-  console.log(inputData);
+  console.log("inputData>>>>", inputData);
+  // finds the id and compares it to what was entered and replaces the input
+  const found = (timeArray.find(
+    (timeSlot) => timeSlot.id === id
+  ).scheduledEvent = inputData);
   // update timeArray with new information
+  localStorage.setItem("timeArray", JSON.stringify(timeArray));
+  console.log(">>>>> updated array", timeArray);
   // persist entire array into local storage
 }
 
 // on start check local storage to see if it exists
+function getAllData() {
+  const loadedData = JSON.parse(window.localStorage.getItem("timeArray"));
+  console.log("loaded data >>>>>>", loadedData);
+}
+window.onload = getAllData();
 // if the time array does exist, use that to create the elements instead hourAdditions call hour panel for each array
