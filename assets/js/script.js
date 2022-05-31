@@ -33,6 +33,10 @@ const hourPanel = function (timeSlot) {
   // add type to inputSection of text.
   inputSection.setAttribute("type", "text");
   // add button line 6
+  if (timeSlot.scheduledEvent) {
+    inputSection.value = timeSlot.scheduledEvent;
+  } else {
+  }
   var saveTimeButton = document.createElement("button");
   saveTimeButton.classList.add(
     "col-2",
@@ -82,7 +86,14 @@ function hourAdditions() {
     timeArray.push(timeSlot);
   }
 }
-hourAdditions();
+
+if (JSON.parse(window.localStorage.getItem("timeArray"))) {
+  getAllData();
+  console.log("getallData", timeArray);
+} else {
+  hourAdditions();
+  console.log("hourAdditions", timeArray);
+}
 
 console.log(timeArray);
 
@@ -104,16 +115,16 @@ function clickHandlerSaveButton(id) {
 
 // on start check local storage to see if it exists
 // loads all data in array
-function getAllData(id) {
+function getAllData() {
   const loadedData = JSON.parse(window.localStorage.getItem("timeArray"));
   console.log(">>>loaded data>>>", loadedData);
   var i = 0;
   for (i; i < loadedData.length; i++) {
     var scheduledEventInsert = loadedData[i].scheduledEvent;
     console.log("inputs iteration", scheduledEventInsert);
+    hourPanel(loadedData[i]);
   }
 }
 
 // executes function getAllData on loading of page
-window.onload = getAllData();
 // if the time array does exist, use that to create the elements instead hourAdditions call hour panel for each array
