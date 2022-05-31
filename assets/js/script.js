@@ -63,21 +63,19 @@ function hourAdditions() {
     var timeSlot = {};
     timeSlot.id = i;
     timeSlot.scheduledEvent = "";
-    console.log(timeSlot);
     if (i < 12) {
       let hourAm = i + "am";
-      console.log(hourAm);
+
       timeSlot.time = hourAm;
 
       // fuck off for now
     } else if (i == 12) {
       let noon = i + "pm";
-      console.log(noon);
+
       timeSlot.time = noon;
     } else {
       let hourPm = i - 12 + "pm";
 
-      console.log(hourPm);
       timeSlot.time = hourPm;
     }
     hourPanel(timeSlot);
@@ -88,25 +86,34 @@ hourAdditions();
 
 console.log(timeArray);
 
+// saves information to page with button click
 function clickHandlerSaveButton(id) {
   // take in id
   event.preventDefault();
   const inputData = document.getElementById("input-" + id).value;
-  console.log("inputData>>>>", inputData);
+  console.log(">>>inputData>>>", inputData);
   // finds the id and compares it to what was entered and replaces the input
   const found = (timeArray.find(
     (timeSlot) => timeSlot.id === id
   ).scheduledEvent = inputData);
   // update timeArray with new information
   localStorage.setItem("timeArray", JSON.stringify(timeArray));
-  console.log(">>>>> updated array", timeArray);
+  console.log(">>>updated array>>>", timeArray);
   // persist entire array into local storage
 }
 
 // on start check local storage to see if it exists
-function getAllData() {
+// loads all data in array
+function getAllData(id) {
   const loadedData = JSON.parse(window.localStorage.getItem("timeArray"));
-  console.log("loaded data >>>>>>", loadedData);
+  console.log(">>>loaded data>>>", loadedData);
+  var i = 0;
+  for (i; i < loadedData.length; i++) {
+    var scheduledEventInsert = loadedData[i].scheduledEvent;
+    console.log("inputs iteration", scheduledEventInsert);
+  }
 }
+
+// executes function getAllData on loading of page
 window.onload = getAllData();
 // if the time array does exist, use that to create the elements instead hourAdditions call hour panel for each array
